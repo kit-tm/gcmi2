@@ -1,0 +1,28 @@
+# Use tls for all connections between switch, all proxies and controller
+useTls = false
+
+# IP and Port for upstream connection to SDN controller
+upstreamIp = 127.0.0.1
+upstreamPort = 6653
+
+# Port to listen on for Switches to connect
+downstreamPort = 9005
+
+# If set to true, each GCMI App uses a separate proxy. If set to false, all GCMI Apps use the same proxy.
+multipleProxies = false
+
+# List of GCMI Apps that intercept all messages sent from a switch in this order
+# and messages sent from a controller in reverse order
+gcmiApps = \
+  com.dgeiger.enhanced_framework.apps.examples.ScenarioD1App,\
+  com.dgeiger.enhanced_framework.apps.examples.ScenarioD1App
+
+# If set to true, a initialMessage has to match at least one filter of a GCMI App to be forwarded to that GCMI App.
+# If set to false, any initialMessage hast to match all filters of a GCMI App to be forwarded to that GCMI App.
+matchAgainstAtLeastOneFilter = false
+
+# use caching to speed up filtering
+useCache = false
+
+# Save a textfile containing timestamps for received and sent messages for benchmarking experiments
+saveTimestamps = false

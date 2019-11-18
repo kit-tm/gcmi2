@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.dgeiger.enhanced_framework'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+         url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+mainClassName = System.getProperty('mainClass') ?: 'com.dgeiger.enhanced_framework.Main'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.1.0'
+    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.4'
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.4'
+    testCompile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
+    compile group: 'io.netty', name: 'netty-buffer', version: '4.1.43.Final'
+    compile group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
+    compile group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
+    compile 'org.projectfloodlight:openflowj:3.5.0-SNAPSHOT'
+    compile 'com.google.guava:guava:28.0-jre'
+}

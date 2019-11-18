@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "net_floodlightcontroller_learningswitch_learningswitch.h": "c",
+        "net_floodlightcontroller_learningswitch_nativeclock.h": "c"
+    }
+}

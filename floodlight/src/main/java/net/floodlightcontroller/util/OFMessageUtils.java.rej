@@ -1,0 +1,10 @@
+--- src/main/java/net/floodlightcontroller/util/OFMessageUtils.java
++++ src/main/java/net/floodlightcontroller/util/OFMessageUtils.java
+@@ -160,6 +160,7 @@ public class OFMessageUtils {
+ 			OFPacketIn packetInMessage, OFPort egressPort) {
+ 
+ 		OFPacketOut.Builder pob = sw.getOFFactory().buildPacketOut();
++		pob.setXid(packetInMessage.getXid());
+ 
+ 		// Set buffer_id, in_port, actions_len
+ 		pob.setBufferId(packetInMessage.getBufferId());
