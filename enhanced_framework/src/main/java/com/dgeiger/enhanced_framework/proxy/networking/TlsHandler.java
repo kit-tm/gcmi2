@@ -1,7 +1,6 @@
 package com.dgeiger.enhanced_framework.proxy.networking;
 
 import com.dgeiger.enhanced_framework.benchmarking.MessageTimestampRecorder;
-import com.dgeiger.enhanced_framework.proxy.RoutingProxy;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.*;
@@ -22,13 +21,11 @@ public class TlsHandler extends BaseNetworkConnectionHandler {
     private final ByteBuffer receiveBufferEncrypted = ByteBuffer.allocate(4096);
     private final ByteBuffer sendBufferEncrypted = ByteBuffer.allocate(16709);
 
-    private boolean clientMode;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public TlsHandler(SocketChannel socketChannel, SelectionKey key, MessageTimestampRecorder messageTimestampRecorder,
                       boolean clientMode) {
         super(socketChannel, key, messageTimestampRecorder, clientMode);
-        this.clientMode = clientMode;
         log = LoggerFactory.getLogger(TlsHandler.class);
 
         setupSslContexts();
@@ -226,6 +223,9 @@ public class TlsHandler extends BaseNetworkConnectionHandler {
     private void read(){
         try {
             socketChannel.read(receiveBufferEncrypted);
+            if(messageTimestampRecorder != null){
+                messageTimestampRecorder.saveInTime(!clientMode);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

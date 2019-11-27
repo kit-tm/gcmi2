@@ -288,16 +288,16 @@ def plot_double_line_chart_caches_same_messages(data, labels, filename):
     plt.plot('x', '8000 Filters\nwith Cache', data=df, marker='.', markerfacecolor='#B80028', markersize=5,
              color='#B80028',
              linewidth=1)
-    plt.plot('x', '8000 Filters\nwithout Cache', data=df, marker='.', markerfacecolor='#FF9900', markersize=5, color='#FF9900',
+    plt.plot('x', '8000 Filters\nwithout Cache', data=df, marker='x', markerfacecolor='#FF9900', markersize=5, color='#FF9900',
              linewidth=1)
     plt.plot('x', '4000 Filters\nwith Cache', data=df, marker='.', markerfacecolor='#6A8347', markersize=5,
              color='#6A8347',
              linewidth=1)
-    plt.plot('x', '4000 Filters\nwithout Cache', data=df, marker='.', markerfacecolor='#A6CB45', markersize=5, color='#A6CB45',
+    plt.plot('x', '4000 Filters\nwithout Cache', data=df, marker='x', markerfacecolor='#A6CB45', markersize=5, color='#A6CB45',
              linewidth=1)
     plt.plot('x', '1000 Filters\nwith Cache', data=df, marker='.', markerfacecolor='#005B9A', markersize=5, color='#005B9A',
              linewidth=1)
-    plt.plot('x', '1000 Filters\nwithout Cache', data=df, marker='.', markerfacecolor='#74C2E1', markersize=5, color='#74C2E1',
+    plt.plot('x', '1000 Filters\nwithout Cache', data=df, marker='x', markerfacecolor='#74C2E1', markersize=5, color='#74C2E1',
              linewidth=1)
 
     box = axes.get_position()

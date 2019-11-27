@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public abstract class BaseNetworkConnectionHandler implements NetworkConnectionHandler {
 
-    private MessageTimestampRecorder messageTimestampRecorder;
+    MessageTimestampRecorder messageTimestampRecorder;
 
     final ByteBuffer receiveBufferDecrypted = ByteBuffer.allocate(16 * 1024);
     final ByteBuffer sendBufferDecrypted = ByteBuffer.allocate(1000 * 65536); // 1000 * max openflow message length
@@ -27,7 +27,7 @@ public abstract class BaseNetworkConnectionHandler implements NetworkConnectionH
 
     private static final int BACKPRESSURE_LIMIT = 1024;
     private Set<NetworkConnectionHandler> backPressureables = new HashSet<>();
-    private final boolean clientMode;
+    final boolean clientMode;
 
     Logger log;
 

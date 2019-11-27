@@ -18,7 +18,8 @@ public class OFlowMessageParsingConsumer implements Consumer<ByteBuffer> {
     private final MessageTimestampRecorder messageTimestampRecorder;
     private final boolean clientMode;
 
-    public OFlowMessageParsingConsumer(Consumer<OFlowMessage> oflowMessageConsumer, String remoteAddress, MessageTimestampRecorder messageTimestampRecorder, boolean clientMode) {
+    public OFlowMessageParsingConsumer(Consumer<OFlowMessage> oflowMessageConsumer, String remoteAddress,
+                                       MessageTimestampRecorder messageTimestampRecorder, boolean clientMode) {
         this.oflowMessageConsumer = oflowMessageConsumer;
         this.remoteAddress = remoteAddress;
         this.messageTimestampRecorder = messageTimestampRecorder;
@@ -47,7 +48,7 @@ public class OFlowMessageParsingConsumer implements Consumer<ByteBuffer> {
                 OFMessage ofMessage = OFFactories.getGenericReader().readFrom(messageBuffer);
                 messageBuffer.release();
                 if(messageTimestampRecorder != null)
-                    messageTimestampRecorder.saveInXidWithCurrentTime(!clientMode, ofMessage.getXid());
+                    messageTimestampRecorder.saveInXidForExistingTime(ofMessage.getXid(), !clientMode);
                 oflowMessageConsumer.accept(new OFlowMessage(ofMessage, length, remoteAddress));
             } catch (OFParseError e) {
                 throw new RuntimeException(e);

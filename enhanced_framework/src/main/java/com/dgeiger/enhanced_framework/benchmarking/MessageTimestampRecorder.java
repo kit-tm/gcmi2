@@ -22,6 +22,8 @@ public class MessageTimestampRecorder {
 
     private ArrayList<Long> xidsWithoutOutTimesToDownstream;
     private ArrayList<Long> xidsWithoutOutTimesToUpstream;
+    private long timeWithoutInXidsToDownstream;
+    private long timeWithoutInXidsToUpstream;
     private ConcurrentHashMap<Long, ArrayList<Long>> upstreamMeasurements;
     private ConcurrentHashMap<Long, ArrayList<Long>> downstreamMeasurements;
     private ReentrantLock lock;
@@ -120,14 +122,20 @@ public class MessageTimestampRecorder {
             log.warn("saved " + downstreamMeasurements.get(xid).size() + " downstreammeasurements for xid " + xid);
     }
 
-    public void saveInXidWithCurrentTime(boolean upDownstream, long xid){
-        if(upDownstream) saveUpstreamMeasurement(xid, getCurrentTimeMicros());
-        else saveDownstreamMeasurement(xid, getCurrentTimeMicros());
-    }
-
     public void saveOutXid(long xid, boolean upDownstream){
         if(upDownstream) xidsWithoutOutTimesToUpstream.add(xid);
         else xidsWithoutOutTimesToDownstream.add(xid);
+    }
+
+    public void saveInTime(boolean upDownstream){
+        long time = getCurrentTimeMicros();
+        if(upDownstream) timeWithoutInXidsToUpstream = time;
+        else timeWithoutInXidsToDownstream = time;
+    }
+
+    public void saveInXidForExistingTime(long xid, boolean upDownstream){
+        if(upDownstream)saveUpstreamMeasurement(xid, timeWithoutInXidsToUpstream);
+        else saveDownstreamMeasurement(xid, timeWithoutInXidsToDownstream);
     }
 
     public void saveOutTimeForExistingXids(boolean upDownstream){

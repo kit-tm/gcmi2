@@ -32,6 +32,8 @@ public class Handler extends BaseNetworkConnectionHandler {
         int read = 0;
         try {
             read = socketChannel.read(receiveBufferDecrypted);
+            if(messageTimestampRecorder != null)
+                messageTimestampRecorder.saveInTime(!clientMode);
         } catch (IOException e) {
             e.printStackTrace();
         }

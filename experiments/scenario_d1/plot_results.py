@@ -353,7 +353,7 @@ def main(argv):
     path = ''
     outputfile = ''
     try:
-        opts, args = getopt.getopt(argv, "p:o:", [path=", "outputfile="])
+        opts, args = getopt.getopt(argv, "p:o:", ["path=", "outputfile="])
     except getopt.GetoptError:
         print('plot_results.py -p <path> -o <outputfile>')
         sys.exit(2)
